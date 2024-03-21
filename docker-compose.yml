@@ -1,0 +1,16 @@
+﻿services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    healthcheck:
+      test: ["CMD", "sh", "-c", "/opt/mssql-tools/bin/sqlcmd -U sa -P $$MSSQL_SA_PASSWORD -Q 'SELECT 1;'"]
+      interval: 10s
+      retries: 5
+  didenge-webapi:
+    image: sahinmaral/didenge-webapi:${version}
+    container_name: didenge-webapi-container
+    build:
+      context: .
+      dockerfile: src/mainPackages/diDENGE.WebAPI/Dockerfile
+volumes:
+  sqlserver_volume :
+    driver: local

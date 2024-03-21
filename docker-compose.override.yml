@@ -1,0 +1,19 @@
+﻿services:
+  sqlserver:
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Password12*
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_volume:/var/opt/mssql
+  didenge-webapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "5178:8080"
+    depends_on: 
+      sqlserver:
+        condition: service_healthy
+        
+        
