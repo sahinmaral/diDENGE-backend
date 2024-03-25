@@ -13,9 +13,9 @@ builder.Services
     .AddApplicationPart(diDENGE.Presentation.AssemblyReference.Assembly);
 
 builder.Services
-    .AddPersistance(builder.Configuration)
-    .AddApplication()
-    .AddPresentation();
+    .AddPersistanceServices(builder.Configuration)
+    .AddApplicationServices()
+    .AddPresentationServices();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -50,7 +50,6 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-
 app.UseCors("MyOrigin");
 
 if (app.Environment.IsDevelopment())
@@ -62,10 +61,9 @@ if (app.Environment.IsDevelopment())
 if (app.Environment.IsProduction())
     app.ConfigureCustomExceptionMiddleware();
 
-app.MapControllers();
-
-
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapControllers();
 
 app.Run();

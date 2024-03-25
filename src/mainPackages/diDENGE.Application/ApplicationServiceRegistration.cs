@@ -7,9 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace diDENGE.Application;
 
-public static class DependencyInjection
+public static class ApplicationServiceRegistration
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services)
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddMediatR(cfg =>
         {

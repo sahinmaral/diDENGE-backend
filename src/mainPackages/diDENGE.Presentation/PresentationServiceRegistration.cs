@@ -4,9 +4,9 @@ using Microsoft.OpenApi.Models;
 
 namespace diDENGE.Presentation;
 
-public static class DependencyInjection
+public static class PresentationServiceRegistration
 {
-    public static IServiceCollection AddPresentation(this IServiceCollection services)
+    public static IServiceCollection AddPresentationServices(this IServiceCollection services)
     {
         services.AddSwaggerGen(setup =>
         {

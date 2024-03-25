@@ -15,7 +15,7 @@ namespace diDENGE.Application.Features.AddictionLevels.Commands.SaveAddictionLev
 
 public class SaveAddictionLevelOfUserCommand : IRequest<SavedUserAddictionLevelDto>, ISecuredRequest
 {
-    public string[] Roles => new[] { "User" };
+    public string[] Roles => ["User"];
     public string UserId { get; set; }
     public double Grade { get; set; }
     

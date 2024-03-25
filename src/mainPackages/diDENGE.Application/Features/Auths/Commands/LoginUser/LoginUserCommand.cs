@@ -3,7 +3,10 @@ using Core.Security.Entities;
 using Core.Security.JWT;
 using diDENGE.Application.Features.Auths.Dtos;
 using diDENGE.Application.Features.Auths.Rules;
+using diDENGE.Application.Services.Repositories;
+using diDENGE.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace diDENGE.Application.Features.Auths.Commands.LoginUser;
 
@@ -12,34 +15,35 @@ public class LoginUserCommand : IRequest<LoggedUserDto>
     public string UsernameOrEmail { get; set; }
     public string Password { get; set; }
 
-    public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, LoggedUserDto>
+    public class LoginUserCommandHandler(
+        AuthBusinessRules authBusinessRules,
+        IJwtProvider jwtProvider,
+        IMapper mapper,
+        IUserAddictionLevelRepository userAddictionLevelRepository)
+        : IRequestHandler<LoginUserCommand, LoggedUserDto>
     {
-        private readonly IJwtProvider _jwtProvider;
-        private readonly IMapper _mapper;
-        private readonly AuthBusinessRules _authBusinessRules;
-
-        public LoginUserCommandHandler(AuthBusinessRules authBusinessRules, IJwtProvider jwtProvider, IMapper mapper)
-        {
-            _authBusinessRules = authBusinessRules;
-            _jwtProvider = jwtProvider;
-            _mapper = mapper;
-        }
-
         public async Task<LoggedUserDto> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
-            User loggedInUser = await _authBusinessRules.CheckUserWithEmailOrUsernameExists(request.UsernameOrEmail);
+            User loggedInUser = await authBusinessRules.CheckUserWithEmailOrUsernameExists(request.UsernameOrEmail);
 
-            await _authBusinessRules.CheckIfUserEnteredCorrectPassword(loggedInUser, request.Password);
+            await authBusinessRules.CheckIfUserEnteredCorrectPassword(loggedInUser, request.Password);
+
+            var userAddictionLevel = await userAddictionLevelRepository.GetDetailedAsync(
+                predicate:x => x.UserId == loggedInUser.Id,
+                include: levels => levels.Include(l => l.AddictionLevel) 
+                );
+            var mappedUserAddictionLevel = mapper.Map<LoggedUserAddictionLevelDto>(userAddictionLevel);
 
             //TODO: E-posta doğrulaması yerine telefon numarası doğrulaması yapılabilir
             //await _authBusinessRules.CheckIfUserEmailHasBeenVerified(loggedInUser);
 
-            TokenResponse tokenResponse = await _jwtProvider.CreateTokenAsync(loggedInUser);
+            TokenResponse tokenResponse = await jwtProvider.CreateTokenAsync(loggedInUser);
 
-            LoggedUserDto loggedUserDto = _mapper.Map<LoggedUserDto>(loggedInUser);
+            LoggedUserDto loggedUserDto = mapper.Map<LoggedUserDto>(loggedInUser);
             loggedUserDto.AccessToken = tokenResponse.AccessToken;
             loggedUserDto.RefreshToken = tokenResponse.RefreshToken;
             loggedUserDto.RefreshTokenExpires = tokenResponse.RefreshTokenExpires;
+            loggedUserDto.AddictionLevel = mappedUserAddictionLevel;
 
             return loggedUserDto;
         }

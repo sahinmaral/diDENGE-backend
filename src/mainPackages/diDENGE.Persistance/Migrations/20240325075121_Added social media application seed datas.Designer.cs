@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using diDENGE.Persistance.Context;
 
@@ -11,9 +12,11 @@ using diDENGE.Persistance.Context;
 namespace diDENGE.Persistance.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240325075121_Added social media application seed datas")]
+    partial class Addedsocialmediaapplicationseeddatas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,8 +54,8 @@ namespace diDENGE.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4f950a9f-99b8-4910-a5f4-2e0b5d0753f3",
-                            ConcurrencyStamp = "5fa2340b-39d4-4e2b-ab39-53e379bfe040",
+                            Id = "c9dd1587-7e07-49e1-8c88-39121243f142",
+                            ConcurrencyStamp = "7d6b8c49-349e-48a6-947d-dcaedcf8afe2",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -229,7 +232,7 @@ namespace diDENGE.Persistance.Migrations
                         new
                         {
                             Id = "95cec253-2a7e-4466-b7e2-8aef25c437f6",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 316, DateTimeKind.Local).AddTicks(542),
+                            CreatedAt = new DateTime(2024, 3, 25, 10, 51, 21, 502, DateTimeKind.Local).AddTicks(9169),
                             DailyLimit = 0.0,
                             MaximumGrade = 73.0,
                             MinimumGrade = 41.0,
@@ -238,7 +241,7 @@ namespace diDENGE.Persistance.Migrations
                         new
                         {
                             Id = "610ce001-62a1-40bb-8edb-886959be71f1",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 316, DateTimeKind.Local).AddTicks(590),
+                            CreatedAt = new DateTime(2024, 3, 25, 10, 51, 21, 502, DateTimeKind.Local).AddTicks(9222),
                             DailyLimit = 60.0,
                             MaximumGrade = 106.0,
                             MinimumGrade = 74.0,
@@ -247,7 +250,7 @@ namespace diDENGE.Persistance.Migrations
                         new
                         {
                             Id = "4ac95367-eda8-49f2-9894-27421cbe256f",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 316, DateTimeKind.Local).AddTicks(615),
+                            CreatedAt = new DateTime(2024, 3, 25, 10, 51, 21, 502, DateTimeKind.Local).AddTicks(9246),
                             DailyLimit = 90.0,
                             MaximumGrade = 139.0,
                             MinimumGrade = 107.0,
@@ -256,7 +259,7 @@ namespace diDENGE.Persistance.Migrations
                         new
                         {
                             Id = "f4b20091-1884-470a-8f05-6b25eba12a42",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 316, DateTimeKind.Local).AddTicks(643),
+                            CreatedAt = new DateTime(2024, 3, 25, 10, 51, 21, 502, DateTimeKind.Local).AddTicks(9266),
                             DailyLimit = 120.0,
                             MaximumGrade = 172.0,
                             MinimumGrade = 140.0,
@@ -265,7 +268,7 @@ namespace diDENGE.Persistance.Migrations
                         new
                         {
                             Id = "16cbcf23-aff3-4aca-a1f3-01ddc4b79699",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 316, DateTimeKind.Local).AddTicks(667),
+                            CreatedAt = new DateTime(2024, 3, 25, 10, 51, 21, 502, DateTimeKind.Local).AddTicks(9285),
                             DailyLimit = 150.0,
                             MaximumGrade = 205.0,
                             MinimumGrade = 173.0,
@@ -353,71 +356,71 @@ namespace diDENGE.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "35e14787-d9a1-4bce-90a6-94b08c016814",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 322, DateTimeKind.Local).AddTicks(3737),
+                            Id = "3d8d1f5a-d644-42df-895b-ce599e5c6d12",
+                            CreatedAt = new DateTime(2024, 3, 25, 10, 51, 21, 508, DateTimeKind.Local).AddTicks(8626),
                             Name = "Whatsapp",
                             PlaystoreId = "com.whatsapp"
                         },
                         new
                         {
-                            Id = "12c1c2aa-2452-428d-bc23-a1cc9c4b129c",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 322, DateTimeKind.Local).AddTicks(3802),
+                            Id = "d527300b-7c26-41ac-bfb9-631816017197",
+                            CreatedAt = new DateTime(2024, 3, 25, 10, 51, 21, 508, DateTimeKind.Local).AddTicks(8687),
                             Name = "Instagram",
                             PlaystoreId = "com.instagram.android"
                         },
                         new
                         {
-                            Id = "4c635224-f54c-49cb-bded-c93f16a5db0a",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 322, DateTimeKind.Local).AddTicks(3831),
+                            Id = "37de582b-d425-4f0c-8070-7ac2b41d4530",
+                            CreatedAt = new DateTime(2024, 3, 25, 10, 51, 21, 508, DateTimeKind.Local).AddTicks(8716),
                             Name = "Facebook",
                             PlaystoreId = "com.facebook.katana"
                         },
                         new
                         {
-                            Id = "b56ffaa3-c256-4709-b32d-78fe47d7e070",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 322, DateTimeKind.Local).AddTicks(3860),
+                            Id = "c04f044b-9263-4704-8b31-73fac08e1648",
+                            CreatedAt = new DateTime(2024, 3, 25, 10, 51, 21, 508, DateTimeKind.Local).AddTicks(8735),
                             Name = "Twitter",
                             PlaystoreId = "com.twitter.android"
                         },
                         new
                         {
-                            Id = "de9531f1-5d81-4f5a-8688-8d6fe738523b",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 322, DateTimeKind.Local).AddTicks(3888),
+                            Id = "23b08efb-2a72-42e8-9ef0-d275db95ec81",
+                            CreatedAt = new DateTime(2024, 3, 25, 10, 51, 21, 508, DateTimeKind.Local).AddTicks(8764),
                             Name = "Snapchat",
                             PlaystoreId = "com.snapchat.android"
                         },
                         new
                         {
-                            Id = "f2ac8870-19b4-4c39-8b1d-123a581fabb7",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 322, DateTimeKind.Local).AddTicks(3921),
+                            Id = "ab7b5a8e-0ceb-427e-83fd-a20855af564b",
+                            CreatedAt = new DateTime(2024, 3, 25, 10, 51, 21, 508, DateTimeKind.Local).AddTicks(8797),
                             Name = "Youtube",
                             PlaystoreId = "com.google.android.youtube"
                         },
                         new
                         {
-                            Id = "e0fd2a34-7420-44b6-b066-0cc9cacd3fd6",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 322, DateTimeKind.Local).AddTicks(3945),
+                            Id = "d1887587-9d24-426f-8c1f-a45eb4aee3be",
+                            CreatedAt = new DateTime(2024, 3, 25, 10, 51, 21, 508, DateTimeKind.Local).AddTicks(8821),
                             Name = "LinkedIn",
                             PlaystoreId = "com.linkedin.android"
                         },
                         new
                         {
-                            Id = "2a62a5f6-2cd7-438d-90d8-8d69bbd4169e",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 322, DateTimeKind.Local).AddTicks(3974),
+                            Id = "de5640ee-b119-4f45-99c8-6f916c32a6bd",
+                            CreatedAt = new DateTime(2024, 3, 25, 10, 51, 21, 508, DateTimeKind.Local).AddTicks(8850),
                             Name = "Telegram",
                             PlaystoreId = "org.telegram.messenger"
                         },
                         new
                         {
-                            Id = "10be8de8-6941-4f28-b447-b8736e0ee29a",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 322, DateTimeKind.Local).AddTicks(3998),
+                            Id = "a7bcfed8-389c-4109-9fe8-f85cb4c077a4",
+                            CreatedAt = new DateTime(2024, 3, 25, 10, 51, 21, 508, DateTimeKind.Local).AddTicks(8878),
                             Name = "Pinterest",
                             PlaystoreId = "com.pinterest"
                         },
                         new
                         {
-                            Id = "fe6b2e2d-650a-4db6-a46c-419b16f0f4bd",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 322, DateTimeKind.Local).AddTicks(4027),
+                            Id = "882c9990-4f7f-46dc-ad36-2091edf23336",
+                            CreatedAt = new DateTime(2024, 3, 25, 10, 51, 21, 508, DateTimeKind.Local).AddTicks(8934),
                             Name = "TikTok",
                             PlaystoreId = "com.zhiliaoapp.musically"
                         });
@@ -506,68 +509,6 @@ namespace diDENGE.Persistance.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WordOfTheDays", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "b08b49ad-5de5-4819-8ea0-3d69ecd48240",
-                            Content = "Hayatınızdaki değeri, ekranın arkasında değil, gerçek dünyada yaşadığınız anlarda bulacaksınız.",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 330, DateTimeKind.Local).AddTicks(7326)
-                        },
-                        new
-                        {
-                            Id = "560fb86d-0d53-478a-86fd-777d2b07f80a",
-                            Content = "Sosyal medyadan uzaklaştığınızda, gerçek bağlantılar kurabileceğiniz anlar bulacaksınız.",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 330, DateTimeKind.Local).AddTicks(7388)
-                        },
-                        new
-                        {
-                            Id = "bb1dc1e8-7e58-44c6-8d2d-b1eb05ab858e",
-                            Content = "Hayatınızı sosyal medyadan yönlendirmeyin, siz yönlendirin.",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 330, DateTimeKind.Local).AddTicks(7412)
-                        },
-                        new
-                        {
-                            Id = "56752829-14d9-4f2b-b763-ea451ffae326",
-                            Content = "Gerçek mutluluk, ekranın parladığı kadar değil, gökyüzünün altında yaşadığınız anlardadır.",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 330, DateTimeKind.Local).AddTicks(7441)
-                        },
-                        new
-                        {
-                            Id = "99e30e8b-5a65-4b94-a843-1482931c20a0",
-                            Content = "Her 'beğeni' kalbinizden bir parça çalır. Gerçek değeri, kendiniz olmakta bulun.",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 330, DateTimeKind.Local).AddTicks(7470)
-                        },
-                        new
-                        {
-                            Id = "6097390b-95f6-4134-8671-dd3e619d3011",
-                            Content = "Bağımlılığı azaltın, gerçek dünyanın renklerini fark edin.",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 330, DateTimeKind.Local).AddTicks(7490)
-                        },
-                        new
-                        {
-                            Id = "aba301d8-7932-4aca-923e-e90802b5642b",
-                            Content = "Sosyal medya sizi tanımlamasına izin vermeyin, siz kendi hikayenizi yazın.",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 330, DateTimeKind.Local).AddTicks(7508)
-                        },
-                        new
-                        {
-                            Id = "7e8a368b-c84d-4099-923a-dad71069d2b7",
-                            Content = "Geri çekilin ve etrafınızdaki güzellikleri fark edin, en güzel manzaralar ekran değil, gerçek hayattadır.",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 330, DateTimeKind.Local).AddTicks(7537)
-                        },
-                        new
-                        {
-                            Id = "66e18832-82b5-4c75-9046-53707754461a",
-                            Content = "Klavyenizi bırakın ve insanların gözlerine bakın, gerçek bağlantılar o anda kurulur.",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 330, DateTimeKind.Local).AddTicks(7566)
-                        },
-                        new
-                        {
-                            Id = "c54133cc-dd6f-41e9-b337-6e76a4a1e872",
-                            Content = "Sosyal medya, hayatınızın sahnesi olmamalı, sadece bir araç olarak kullanın.",
-                            CreatedAt = new DateTime(2024, 3, 25, 15, 16, 5, 330, DateTimeKind.Local).AddTicks(7594)
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
