@@ -6,7 +6,7 @@
       interval: 10s
       retries: 5
   didenge-webapi:
-    image: sahinmaral/didenge-webapi:${version}
+    image: sahinmaral/didenge-webapi:1.0
     container_name: didenge-webapi-container
     build:
       context: .
