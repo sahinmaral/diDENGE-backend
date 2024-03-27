@@ -13,13 +13,4 @@ public class LoggedUserDto : TokenResponse
     public string UserName { get; init; }
     public string Email { get; init; }
     public bool IsNewUser { get; set; }
-    public LoggedUserAddictionLevelDto AddictionLevel { get; set; }
-}
-
-public class LoggedUserAddictionLevelDto
-{
-    public string Name { get; set; }
-    public double DailyLimit { get; set; }
-    public double MinimumGrade { get; set; }
-    public double MaximumGrade { get; set; }
 }
