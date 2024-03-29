@@ -21,7 +21,14 @@ public class UpdateProfileImageCommand : IRequest<UpdatedProfileImageDto>
         public async Task<UpdatedProfileImageDto> Handle(UpdateProfileImageCommand request, CancellationToken cancellationToken)
         {
             User updatedUser = await authBusinessRules.CheckUserExistsById(request.UserId);
-            
+
+            if (updatedUser.ProfilePhotoURL is not null)
+            {
+                var deletingOldImageResult = await cloudinaryService.DeleteImageAsync(
+                    ConvertPhotoPathToPublicId(updatedUser.ProfilePhotoURL), 
+                    cancellationToken);
+            }
+
             var uploadedImageResult = await cloudinaryService.UploadImageAsync(request.Image, cancellationToken);
             string uploadedImagePath = $"{uploadedImageResult.FullyQualifiedPublicId}.{uploadedImageResult.Format}";
 
@@ -30,6 +37,14 @@ public class UpdateProfileImageCommand : IRequest<UpdatedProfileImageDto>
             await userManager.UpdateAsync(updatedUser);
 
             return new UpdatedProfileImageDto() { NewProfileImagePath = uploadedImagePath };
+        }
+        
+        private string ConvertPhotoPathToPublicId(string photoPath)
+        {
+            string modifiedString = photoPath.Replace("image/upload/", "");
+            int dotIndex = modifiedString.IndexOf('.');
+            modifiedString = modifiedString.Substring(0, dotIndex);
+            return modifiedString;
         }
     }
 }

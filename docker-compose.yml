@@ -11,6 +11,8 @@
     build:
       context: .
       dockerfile: src/mainPackages/diDENGE.WebAPI/Dockerfile
+    env_file:
+      - .env
 volumes:
   sqlserver_volume :
     driver: local

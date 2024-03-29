@@ -13,11 +13,6 @@ public class CloudinaryService : ICloudinaryService
     public CloudinaryService(IOptions<CloudinaryOptions> cloudinaryOptions)
     {
         CloudinaryOptions cloudinaryOptionsValue = cloudinaryOptions.Value;
-        
-        Console.WriteLine("CloudinaryOptions:");
-        Console.WriteLine($"CloudName: {cloudinaryOptionsValue.CloudName}");
-        Console.WriteLine($"APIKey: {cloudinaryOptionsValue.APIKey}");
-        Console.WriteLine($"APISecret: {cloudinaryOptionsValue.APISecret}");
 
         Account account = new Account(
             cloudinaryOptionsValue.CloudName,

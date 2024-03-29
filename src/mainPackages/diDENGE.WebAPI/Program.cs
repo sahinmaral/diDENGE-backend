@@ -3,10 +3,15 @@ using diDENGE.Application;
 using diDENGE.Persistance;
 using diDENGE.Presentation;
 using Core.Security;
+using diDENGE.Infrastructure;
 using diDENGE.Persistance.Context;
+using DotNetEnv.Configuration;
 using Microsoft.EntityFrameworkCore;
 
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration.AddDotNetEnv();
 
 builder.Services
     .AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true)
@@ -14,6 +19,7 @@ builder.Services
 
 builder.Services
     .AddPersistanceServices(builder.Configuration)
+    .AddInfrastructureServices()
     .AddApplicationServices()
     .AddPresentationServices();
 
@@ -60,6 +66,7 @@ if (app.Environment.IsDevelopment())
 
 if (app.Environment.IsProduction())
     app.ConfigureCustomExceptionMiddleware();
+
 
 app.UseAuthentication();
 app.UseAuthorization();

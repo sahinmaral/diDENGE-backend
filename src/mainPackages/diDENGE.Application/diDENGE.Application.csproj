@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="CloudinaryDotNet" Version="1.26.2" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
     <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
@@ -21,6 +22,13 @@
 
   <ItemGroup>
     <Folder Include="Features\Auths\" />
+    <Folder Include="Features\Users\Profiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CloudinaryDotNet">
+      <HintPath>..\..\..\..\..\..\.nuget\packages\cloudinarydotnet\1.26.2\lib\netstandard2.0\CloudinaryDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

@@ -5,27 +5,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace diDENGE.Application.Features.Auths.Rules;
 
-public class AuthBusinessRules
+public class AuthBusinessRules(UserManager<User> userManager)
 {
-    private readonly UserManager<User> _userManager;
-    private readonly RoleManager<Role> _roleManager;
-    public AuthBusinessRules(UserManager<User> userManager, RoleManager<Role> roleManager)
+    public async Task<User> CheckUserExistsById(string id)
     {
-        _userManager = userManager;
-        _roleManager = roleManager;
-    }
-
-    public async Task CheckUserExistsById(string id)
-    {
-        User? foundUser = await _userManager.FindByIdAsync(id);
+        User? foundUser = await userManager.FindByIdAsync(id);
 
         if (foundUser is null)
             throw new EntityNotFoundException("User does not found");
+
+        return foundUser;
     }
 
     public async Task CheckUserWithUsernameAlreadyExists(string userName)
     {
-        User? foundUser = await _userManager.FindByNameAsync(userName);
+        User? foundUser = await userManager.FindByNameAsync(userName);
 
         if (foundUser is not null)
             throw new BusinessException("This username is already taken");
@@ -33,7 +27,7 @@ public class AuthBusinessRules
 
     public async Task CheckUserWithEmailAlreadyExists(string email)
     {
-        User? foundUser = await _userManager.FindByEmailAsync(email);
+        User? foundUser = await userManager.FindByEmailAsync(email);
 
         if (foundUser is not null)
             throw new BusinessException("This e-mail address is already taken");
@@ -41,7 +35,7 @@ public class AuthBusinessRules
 
     public async Task<User> CheckUserWithEmailOrUsernameExists(string usernameOrEmail)
     {
-        User? user = await _userManager
+        User? user = await userManager
               .Users
               .Where(x => x.UserName == usernameOrEmail || x.Email == usernameOrEmail)
               .FirstOrDefaultAsync();
@@ -54,15 +48,15 @@ public class AuthBusinessRules
 
     public async Task CheckIfUserEnteredCorrectPassword(User user, string password)
     {
-        var passwordCheckResult = await _userManager.CheckPasswordAsync(user, password);
+        var passwordCheckResult = await userManager.CheckPasswordAsync(user, password);
         if (!passwordCheckResult)
-            throw new Exception("You entered the wrong password along with the username or email you entered");
+            throw new BusinessException("You entered the wrong password along with the username or email you entered");
     }
 
     public Task CheckIfUserEmailHasBeenVerified(User user)
     {
         if (!user.EmailConfirmed)
-            throw new Exception("Please confirm your account via the e - mail sent to the e - mail address you registered with");
+            throw new BusinessException("Please confirm your account via the e - mail sent to the e - mail address you registered with");
 
         return Task.CompletedTask;
     }

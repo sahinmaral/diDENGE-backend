@@ -7,17 +7,18 @@ Gerekenler :
 
 - Docker
 
-### Yapılacaklar (v1)
+### Yapılacaklar
 
+- <b>Ana</b> konumunda .env dosyası oluşturun ve bu dosyanın içerisine aşağıdaki bilgileri girin: <br/>
+  ```plaintext
+    CLOUDINARY_API_SECRET=SENIN_CLOUDINARY_API_SECRET_DEGERIN
+    CLOUDINARY_API_KEY=SENIN_CLOUDINARY_API_ANAHTARIN
+    CLOUDINARY_CLOUD_NAME=SENIN_CLOUDINARY_CLOUD_ADIN
+  ```
 - Projenin dizininde terminali açın.
 - `docker compose build` komutunu yazarsak projedeki gerekli image dosyalarını yükler
 - `docker compose create` komutunu yazarsak container ları oluşturur
 - `docker compose start` komutunu yazarsak container ları çalıştırır
-
-### Yapılacaklar (v2)
-
-- Projenin dizininde terminali açın.
-- `docker compose up -d` komutunu yazarsak image dosyalarını yükler, sonrasında container ları oluşturur ve sonrasında ise çalıştırır
 
 ### Port numaraları
 
@@ -32,17 +33,18 @@ Requirements:
 
 - Docker
 
-### Steps to Perform (v1)
+### Steps to Perform
 
+- Create a .env file in the <b> main </b> directory and enter the following information into this file: <br/>
+  ```plaintext
+    CLOUDINARY_API_SECRET=YOUR_CLOUDINARY_API_SECRET_VALUE
+    CLOUDINARY_API_KEY=YOUR_CLOUDINARY_API_KEY_VALUE
+    CLOUDINARY_CLOUD_NAME=YOUR_CLOUDINARY_CLOUD_NAME_VALUE
+  ```
 - Open the terminal in the project directory.
 - If you write the command `docker compose build`, it installs the necessary image files in the project.
 - If you write the command `docker compose create`, it creates the containers.
 - If you write the command `docker compose start`, it starts the containers.
-
-### Steps to Perform (v2)
-
-- Open the terminal in the project directory.
-- If you write the command `docker compose up -d`, it installs the image files, then creates the containers, and finally starts them.
 
 ### Port numbers
 
