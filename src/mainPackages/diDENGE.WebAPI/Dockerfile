@@ -8,6 +8,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/mainPackages/diDENGE.WebAPI/diDENGE.WebAPI.csproj", "src/mainPackages/diDENGE.WebAPI/"]
+COPY ["src/mainPackages/diDENGE.Infrastructure/diDENGE.Infrastructure.csproj", "src/mainPackages/diDENGE.Infrastructure/"]
 COPY ["src/mainPackages/diDENGE.Presentation/diDENGE.Presentation.csproj", "src/mainPackages/diDENGE.Presentation/"]
 COPY ["src/mainPackages/diDENGE.Persistance/diDENGE.Persistance.csproj", "src/mainPackages/diDENGE.Persistance/"]
 COPY ["src/corePackages/Core.Security/Core.Security.csproj", "src/corePackages/Core.Security/"]
