@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using diDENGE.Persistance.Context;
 
@@ -11,9 +12,11 @@ using diDENGE.Persistance.Context;
 namespace diDENGE.Persistance.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240429220404_Updated Id property of Role and WordOfTheDay entities as static value for preventing update every time migration occurs")]
+    partial class UpdatedIdpropertyofRoleandWordOfTheDayentitiesasstaticvalueforpreventingupdateeverytimemigrationoccurs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +55,7 @@ namespace diDENGE.Persistance.Migrations
                         new
                         {
                             Id = "9f867519-977e-46da-87b7-eca5a30d7d0c",
-                            ConcurrencyStamp = "c24248ef-e6a7-4ed5-be0f-5335e5cc6774",
+                            ConcurrencyStamp = "02189894-f51a-4ad2-8e78-d4b7f240600c",
                             Name = "User",
                             NormalizedName = "USER"
                         });

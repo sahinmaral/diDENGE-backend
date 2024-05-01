@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using diDENGE.Persistance.Context;
 
@@ -11,9 +12,11 @@ using diDENGE.Persistance.Context;
 namespace diDENGE.Persistance.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240429215726_Deleted currentGrade property of ProcedurePointInformation entity")]
+    partial class DeletedcurrentGradepropertyofProcedurePointInformationentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,8 +54,8 @@ namespace diDENGE.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9f867519-977e-46da-87b7-eca5a30d7d0c",
-                            ConcurrencyStamp = "c24248ef-e6a7-4ed5-be0f-5335e5cc6774",
+                            Id = "99a4d7a6-d5ac-41cf-bc11-e1187f11d8c0",
+                            ConcurrencyStamp = "02655f16-a57b-4213-9154-f78f7d39a48e",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -379,70 +382,70 @@ namespace diDENGE.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "41d3cd5b-e785-44cb-939b-3c0e11b14a8a",
+                            Id = "51984c42-0ac8-4539-b58e-00cd48a7fe34",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Whatsapp",
                             PlaystoreId = "com.whatsapp"
                         },
                         new
                         {
-                            Id = "d47cb6a0-6526-4af4-866c-ae012e2938f3",
+                            Id = "164b41e0-7434-408c-a72e-dd84545fc266",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Instagram",
                             PlaystoreId = "com.instagram.android"
                         },
                         new
                         {
-                            Id = "6ae0c69e-20e8-43b9-acd7-9a438cd1a5d9",
+                            Id = "e5c9cae4-2d4c-45d3-8a82-43ea107f9dcb",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Facebook",
                             PlaystoreId = "com.facebook.katana"
                         },
                         new
                         {
-                            Id = "08051b49-4847-4787-9983-899285774427",
+                            Id = "b7f30572-da99-428b-8467-92a24212f365",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Twitter",
                             PlaystoreId = "com.twitter.android"
                         },
                         new
                         {
-                            Id = "fa4ea881-b41e-4240-9077-595943f77a3e",
+                            Id = "d625b39b-43a9-416d-b229-b0d3cf981c0f",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Snapchat",
                             PlaystoreId = "com.snapchat.android"
                         },
                         new
                         {
-                            Id = "d8854cf2-5e6c-4cfd-8eb3-356d7d208aee",
+                            Id = "78d21b42-34cf-4180-b0b6-39661df16f5d",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Youtube",
                             PlaystoreId = "com.google.android.youtube"
                         },
                         new
                         {
-                            Id = "c84c5b3e-9a2b-48db-9254-fbfb347dda62",
+                            Id = "9a9e9ff4-93db-4b0b-afe1-370723f3664f",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "LinkedIn",
                             PlaystoreId = "com.linkedin.android"
                         },
                         new
                         {
-                            Id = "d5cafb1f-c7ad-4a17-b0df-aedf9825f057",
+                            Id = "4d451c71-a3ac-4baf-bdd1-f31cce5d3bd0",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Telegram",
                             PlaystoreId = "org.telegram.messenger"
                         },
                         new
                         {
-                            Id = "61b5b168-0027-4e62-9eab-681a5c69ad82",
+                            Id = "7d7f61d1-7626-4899-918f-cf47f6c7853a",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Pinterest",
                             PlaystoreId = "com.pinterest"
                         },
                         new
                         {
-                            Id = "084ee64b-c8e6-40e2-949e-bfa29b205699",
+                            Id = "8a1a3a89-6a11-4a80-a3b3-365725493e4f",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "TikTok",
                             PlaystoreId = "com.zhiliaoapp.musically"
@@ -536,61 +539,61 @@ namespace diDENGE.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "14831e89-5d31-4d5f-96ec-4f7e1c58462d",
+                            Id = "d8a7a6a5-1658-46af-8964-05ab7243be43",
                             Content = "Hayatınızdaki değeri, ekranın arkasında değil, gerçek dünyada yaşadığınız anlarda bulacaksınız.",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = "9ca587b8-e44e-4be0-8289-38205cd64ebd",
+                            Id = "a2f7fdae-ef64-47e0-a344-a47ff144b9f2",
                             Content = "Sosyal medyadan uzaklaştığınızda, gerçek bağlantılar kurabileceğiniz anlar bulacaksınız.",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = "37f1dc39-a9dc-450f-86a2-4a58e430795c",
+                            Id = "1de8bede-f92b-4a94-8af3-6b15fe86dea1",
                             Content = "Hayatınızı sosyal medyadan yönlendirmeyin, siz yönlendirin.",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = "35fc2e4e-5ef7-45ea-9608-80706de22747",
+                            Id = "978ac017-ebd5-4b96-92c3-821560081e98",
                             Content = "Gerçek mutluluk, ekranın parladığı kadar değil, gökyüzünün altında yaşadığınız anlardadır.",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = "eb80bd4f-3ce9-4a95-89df-10fb99e19c43",
+                            Id = "b1e7e772-4b93-4765-a50f-86d083f92da5",
                             Content = "Her 'beğeni' kalbinizden bir parça çalır. Gerçek değeri, kendiniz olmakta bulun.",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = "3dd6e341-0c9d-4587-8f3b-3cc9b04855d7",
+                            Id = "7de044c6-9d6e-4b75-b5e2-17211abdb9b3",
                             Content = "Bağımlılığı azaltın, gerçek dünyanın renklerini fark edin.",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = "96ec88d4-426b-4d19-a868-33af51c8760d",
+                            Id = "66cc2e47-7253-43a8-9760-84fa7a74b57c",
                             Content = "Sosyal medya sizi tanımlamasına izin vermeyin, siz kendi hikayenizi yazın.",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = "6a606036-f0c9-4b10-8711-f894f6edcd05",
+                            Id = "e44af59a-a282-42ab-beea-39e7ae581e25",
                             Content = "Geri çekilin ve etrafınızdaki güzellikleri fark edin, en güzel manzaralar ekran değil, gerçek hayattadır.",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = "e0720a5b-1037-4826-aba3-59c187cd1908",
+                            Id = "9811bd23-26c8-42eb-a33b-411861f576f1",
                             Content = "Klavyenizi bırakın ve insanların gözlerine bakın, gerçek bağlantılar o anda kurulur.",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = "023434b7-6973-4c4e-af6c-abaf10570569",
+                            Id = "4ab2ae6f-2be4-4a6b-a884-d0b8bda3fe31",
                             Content = "Sosyal medya, hayatınızın sahnesi olmamalı, sadece bir araç olarak kullanın.",
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });

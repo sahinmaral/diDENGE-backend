@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using diDENGE.Persistance.Context;
 
@@ -11,9 +12,11 @@ using diDENGE.Persistance.Context;
 namespace diDENGE.Persistance.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240401143412_Added seed data at procedure entity")]
+    partial class Addedseeddataatprocedureentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,8 +54,8 @@ namespace diDENGE.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9f867519-977e-46da-87b7-eca5a30d7d0c",
-                            ConcurrencyStamp = "c24248ef-e6a7-4ed5-be0f-5335e5cc6774",
+                            Id = "3d6d4db2-1b90-4d8c-833b-8b46cd26d70b",
+                            ConcurrencyStamp = "a65ee39f-827c-4f23-bcb9-701671404ca3",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -229,7 +232,7 @@ namespace diDENGE.Persistance.Migrations
                         new
                         {
                             Id = "95cec253-2a7e-4466-b7e2-8aef25c437f6",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 311, DateTimeKind.Local).AddTicks(5526),
                             DailyLimit = 0.0,
                             MaximumGrade = 73.0,
                             MinimumGrade = 41.0,
@@ -238,7 +241,7 @@ namespace diDENGE.Persistance.Migrations
                         new
                         {
                             Id = "610ce001-62a1-40bb-8edb-886959be71f1",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 311, DateTimeKind.Local).AddTicks(5597),
                             DailyLimit = 60.0,
                             MaximumGrade = 106.0,
                             MinimumGrade = 74.0,
@@ -247,7 +250,7 @@ namespace diDENGE.Persistance.Migrations
                         new
                         {
                             Id = "4ac95367-eda8-49f2-9894-27421cbe256f",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 311, DateTimeKind.Local).AddTicks(5622),
                             DailyLimit = 90.0,
                             MaximumGrade = 139.0,
                             MinimumGrade = 107.0,
@@ -256,7 +259,7 @@ namespace diDENGE.Persistance.Migrations
                         new
                         {
                             Id = "f4b20091-1884-470a-8f05-6b25eba12a42",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 311, DateTimeKind.Local).AddTicks(5636),
                             DailyLimit = 120.0,
                             MaximumGrade = 172.0,
                             MinimumGrade = 140.0,
@@ -265,7 +268,7 @@ namespace diDENGE.Persistance.Migrations
                         new
                         {
                             Id = "16cbcf23-aff3-4aca-a1f3-01ddc4b79699",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 311, DateTimeKind.Local).AddTicks(5656),
                             DailyLimit = 150.0,
                             MaximumGrade = 205.0,
                             MinimumGrade = 173.0,
@@ -296,19 +299,19 @@ namespace diDENGE.Persistance.Migrations
                         new
                         {
                             Id = "d5cbddb9-e315-4c56-8ef7-bcaeb68e7b9b",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 313, DateTimeKind.Local).AddTicks(376),
                             Name = "Takdir"
                         },
                         new
                         {
                             Id = "d2337816-2312-44e0-8e6b-dab47a7ca01d",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 313, DateTimeKind.Local).AddTicks(434),
                             Name = "Hatırlatıcı"
                         },
                         new
                         {
                             Id = "a28a5be9-e694-40e8-8a31-9c282d61157d",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 313, DateTimeKind.Local).AddTicks(453),
                             Name = "Uyarı"
                         });
                 });
@@ -322,11 +325,11 @@ namespace diDENGE.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<double>("CurrentGrade")
+                        .HasColumnType("float");
 
                     b.Property<double>("OverallGrade")
                         .HasColumnType("float");
@@ -379,71 +382,71 @@ namespace diDENGE.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "41d3cd5b-e785-44cb-939b-3c0e11b14a8a",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = "d0ee4cec-171e-44b1-9f91-1318c3bb6c77",
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 321, DateTimeKind.Local).AddTicks(6969),
                             Name = "Whatsapp",
                             PlaystoreId = "com.whatsapp"
                         },
                         new
                         {
-                            Id = "d47cb6a0-6526-4af4-866c-ae012e2938f3",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = "9c29b578-e746-4ccd-ada0-e9c40617b232",
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 321, DateTimeKind.Local).AddTicks(7069),
                             Name = "Instagram",
                             PlaystoreId = "com.instagram.android"
                         },
                         new
                         {
-                            Id = "6ae0c69e-20e8-43b9-acd7-9a438cd1a5d9",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = "85421692-8036-4968-85a5-ab8383dd8e60",
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 321, DateTimeKind.Local).AddTicks(7089),
                             Name = "Facebook",
                             PlaystoreId = "com.facebook.katana"
                         },
                         new
                         {
-                            Id = "08051b49-4847-4787-9983-899285774427",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = "f1656b9b-f898-49fb-ad52-99d15f99a5b6",
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 321, DateTimeKind.Local).AddTicks(7118),
                             Name = "Twitter",
                             PlaystoreId = "com.twitter.android"
                         },
                         new
                         {
-                            Id = "fa4ea881-b41e-4240-9077-595943f77a3e",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = "14a08b23-ab67-4d71-8d89-017783b5f63e",
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 321, DateTimeKind.Local).AddTicks(7147),
                             Name = "Snapchat",
                             PlaystoreId = "com.snapchat.android"
                         },
                         new
                         {
-                            Id = "d8854cf2-5e6c-4cfd-8eb3-356d7d208aee",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = "f167fae4-a421-4138-80bd-d2a0e238e023",
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 321, DateTimeKind.Local).AddTicks(7180),
                             Name = "Youtube",
                             PlaystoreId = "com.google.android.youtube"
                         },
                         new
                         {
-                            Id = "c84c5b3e-9a2b-48db-9254-fbfb347dda62",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = "61e3bf50-3f7c-4e2f-8482-1d26cb99a355",
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 321, DateTimeKind.Local).AddTicks(7203),
                             Name = "LinkedIn",
                             PlaystoreId = "com.linkedin.android"
                         },
                         new
                         {
-                            Id = "d5cafb1f-c7ad-4a17-b0df-aedf9825f057",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = "ad3afbca-1ef1-4bad-b0dc-513879df7eeb",
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 321, DateTimeKind.Local).AddTicks(7227),
                             Name = "Telegram",
                             PlaystoreId = "org.telegram.messenger"
                         },
                         new
                         {
-                            Id = "61b5b168-0027-4e62-9eab-681a5c69ad82",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = "955a5468-9aa3-485a-9d33-8aad3766ad2c",
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 321, DateTimeKind.Local).AddTicks(7247),
                             Name = "Pinterest",
                             PlaystoreId = "com.pinterest"
                         },
                         new
                         {
-                            Id = "084ee64b-c8e6-40e2-949e-bfa29b205699",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = "e45ee300-0de3-4969-9f88-49c0d33bc82d",
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 321, DateTimeKind.Local).AddTicks(7280),
                             Name = "TikTok",
                             PlaystoreId = "com.zhiliaoapp.musically"
                         });
@@ -536,63 +539,63 @@ namespace diDENGE.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "14831e89-5d31-4d5f-96ec-4f7e1c58462d",
+                            Id = "07a6b99b-2048-41ab-b3a8-4dbbed760cce",
                             Content = "Hayatınızdaki değeri, ekranın arkasında değil, gerçek dünyada yaşadığınız anlarda bulacaksınız.",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 334, DateTimeKind.Local).AddTicks(2550)
                         },
                         new
                         {
-                            Id = "9ca587b8-e44e-4be0-8289-38205cd64ebd",
+                            Id = "c78ee64f-d26d-4ce0-b446-b929e358c07a",
                             Content = "Sosyal medyadan uzaklaştığınızda, gerçek bağlantılar kurabileceğiniz anlar bulacaksınız.",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 334, DateTimeKind.Local).AddTicks(2626)
                         },
                         new
                         {
-                            Id = "37f1dc39-a9dc-450f-86a2-4a58e430795c",
+                            Id = "150c66aa-e80a-4612-be0b-3358216f61f9",
                             Content = "Hayatınızı sosyal medyadan yönlendirmeyin, siz yönlendirin.",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 334, DateTimeKind.Local).AddTicks(2650)
                         },
                         new
                         {
-                            Id = "35fc2e4e-5ef7-45ea-9608-80706de22747",
+                            Id = "82c8915d-f731-481b-a3d9-3ac3403b0baa",
                             Content = "Gerçek mutluluk, ekranın parladığı kadar değil, gökyüzünün altında yaşadığınız anlardadır.",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 334, DateTimeKind.Local).AddTicks(2839)
                         },
                         new
                         {
-                            Id = "eb80bd4f-3ce9-4a95-89df-10fb99e19c43",
+                            Id = "0fbc3890-f860-40ba-8a19-0ba43554d0d7",
                             Content = "Her 'beğeni' kalbinizden bir parça çalır. Gerçek değeri, kendiniz olmakta bulun.",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 334, DateTimeKind.Local).AddTicks(2867)
                         },
                         new
                         {
-                            Id = "3dd6e341-0c9d-4587-8f3b-3cc9b04855d7",
+                            Id = "9768f252-ae63-4bd6-9de2-08a8625b6a37",
                             Content = "Bağımlılığı azaltın, gerçek dünyanın renklerini fark edin.",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 334, DateTimeKind.Local).AddTicks(2896)
                         },
                         new
                         {
-                            Id = "96ec88d4-426b-4d19-a868-33af51c8760d",
+                            Id = "60b40725-fe25-4409-8f11-57aaf917e2a1",
                             Content = "Sosyal medya sizi tanımlamasına izin vermeyin, siz kendi hikayenizi yazın.",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 334, DateTimeKind.Local).AddTicks(2925)
                         },
                         new
                         {
-                            Id = "6a606036-f0c9-4b10-8711-f894f6edcd05",
+                            Id = "de2754ed-a4b3-4e38-bf21-54ba27b49326",
                             Content = "Geri çekilin ve etrafınızdaki güzellikleri fark edin, en güzel manzaralar ekran değil, gerçek hayattadır.",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 334, DateTimeKind.Local).AddTicks(2948)
                         },
                         new
                         {
-                            Id = "e0720a5b-1037-4826-aba3-59c187cd1908",
+                            Id = "a9fffad5-1cca-4a30-8322-ee29af81ca0a",
                             Content = "Klavyenizi bırakın ve insanların gözlerine bakın, gerçek bağlantılar o anda kurulur.",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 334, DateTimeKind.Local).AddTicks(2981)
                         },
                         new
                         {
-                            Id = "023434b7-6973-4c4e-af6c-abaf10570569",
+                            Id = "16180a53-7a4d-4323-8b36-6a3c872559c4",
                             Content = "Sosyal medya, hayatınızın sahnesi olmamalı, sadece bir araç olarak kullanın.",
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedAt = new DateTime(2024, 4, 1, 17, 34, 12, 334, DateTimeKind.Local).AddTicks(3009)
                         });
                 });
 

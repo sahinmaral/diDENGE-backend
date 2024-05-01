@@ -16,6 +16,8 @@ public static class PersistanceServiceRegistration
         services.AddScoped<IAddictionLevelRepository, AddictionLevelRepository>();
         services.AddScoped<IUserAddictionLevelRepository, UserAddictionLevelRepository>();
         services.AddScoped<IWordOfTheDayRepository, WordOfTheDayRepository>();
+        services.AddScoped<IProcedurePointInformationRepository, ProcedurePointInformationRepository>();
+        services.AddScoped<IProcedureRepository, ProcedureRepository>();
 
         services.AddDbContext<AppDbContext>(options =>
         {

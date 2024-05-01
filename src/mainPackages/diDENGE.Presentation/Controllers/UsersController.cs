@@ -1,3 +1,4 @@
+using diDENGE.Application.Features.Users.Commands.DeleteProfileImage;
 using diDENGE.Application.Features.Users.Commands.UpdateNameSurname;
 using diDENGE.Application.Features.Users.Commands.UpdatePassword;
 using diDENGE.Application.Features.Users.Commands.UpdateProfileImage;
@@ -49,6 +50,18 @@ public class UsersController : BaseController
         UpdatedProfileImageDto response = await mediator.Send(request);
         
         return Ok(response);
+    }
+    
+    [HttpDelete("DeleteProfileImage/{userId}")]
+    public async Task<IActionResult> DeleteProfileImage([FromRoute]string userId)
+    {
+        DeleteProfileImageCommand request = new DeleteProfileImageCommand()
+        {
+            UserId = userId
+        };
+        await mediator.Send(request);
+        
+        return NoContent();
     }
 
 }

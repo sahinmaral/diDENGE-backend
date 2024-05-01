@@ -12,6 +12,10 @@ public sealed class RoleConfiguration : IEntityTypeConfiguration<Role>
         builder.HasKey(x => x.Id);
 
         builder.HasData(
-            new Role(){Id = Guid.NewGuid().ToString(), Name = "User", NormalizedName = "USER", ConcurrencyStamp = Guid.NewGuid().ToString()});
+            new Role()
+            {
+                Id = "9f867519-977e-46da-87b7-eca5a30d7d0c", Name = "User", NormalizedName = "USER",
+                ConcurrencyStamp = "c24248ef-e6a7-4ed5-be0f-5335e5cc6774"
+            });
     }
 }

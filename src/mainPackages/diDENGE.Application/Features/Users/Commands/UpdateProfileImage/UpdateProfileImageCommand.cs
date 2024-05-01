@@ -1,6 +1,7 @@
 using Core.Security.Entities;
 using diDENGE.Application.Features.Auths.Rules;
 using diDENGE.Application.Features.Users.Dtos;
+using diDENGE.Application.Features.Users.Helpers;
 using diDENGE.Application.Services.FileStorage;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -25,7 +26,7 @@ public class UpdateProfileImageCommand : IRequest<UpdatedProfileImageDto>
             if (updatedUser.ProfilePhotoURL is not null)
             {
                 var deletingOldImageResult = await cloudinaryService.DeleteImageAsync(
-                    ConvertPhotoPathToPublicId(updatedUser.ProfilePhotoURL), 
+                    UserHelpers.ConvertPhotoPathToPublicId(updatedUser.ProfilePhotoURL), 
                     cancellationToken);
             }
 
@@ -37,14 +38,6 @@ public class UpdateProfileImageCommand : IRequest<UpdatedProfileImageDto>
             await userManager.UpdateAsync(updatedUser);
 
             return new UpdatedProfileImageDto() { NewProfileImagePath = uploadedImagePath };
-        }
-        
-        private string ConvertPhotoPathToPublicId(string photoPath)
-        {
-            string modifiedString = photoPath.Replace("image/upload/", "");
-            int dotIndex = modifiedString.IndexOf('.');
-            modifiedString = modifiedString.Substring(0, dotIndex);
-            return modifiedString;
         }
     }
 }
