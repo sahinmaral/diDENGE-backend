@@ -11,6 +11,9 @@ public class SocialMediaApplicationUsage : Entity
     public string AddictionLevelId { get; set; }
     public AddictionLevel AddictionLevel { get; set; }
 
+    public string SocialMediaApplicationId { get; set; }
+    public SocialMediaApplication SocialMediaApplication { get; set; }
+
     public double SpentTime { get; set; }
     public int OpeningCount { get; set; }
 }

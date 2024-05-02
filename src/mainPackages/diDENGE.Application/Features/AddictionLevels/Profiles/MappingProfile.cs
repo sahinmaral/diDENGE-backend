@@ -13,6 +13,10 @@ public class MappingProfile : Profile
 
         CreateMap<UserAddictionLevel, GetAddictionLevelByUserIdDto>()
             .ForMember(
+                dest => dest.Id,
+                opt => opt.MapFrom(src => src.AddictionLevelId)
+            )
+            .ForMember(
                 dest => dest.Name,
                 opt => opt.MapFrom(src => src.AddictionLevel.Name)
             )

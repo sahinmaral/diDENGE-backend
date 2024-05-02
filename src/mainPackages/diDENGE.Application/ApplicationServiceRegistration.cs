@@ -1,5 +1,6 @@
 ﻿using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Validation;
+using diDENGE.Application.Features.AddictionLevels.Rules;
 using diDENGE.Application.Features.Auths.Rules;
 using FluentValidation;
 using MediatR;
@@ -23,7 +24,8 @@ public static class ApplicationServiceRegistration
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
         
         services.AddScoped<AuthBusinessRules>();
-
+        services.AddScoped<AddictionLevelBusinessRules>();
+        
         return services;
     }
 }

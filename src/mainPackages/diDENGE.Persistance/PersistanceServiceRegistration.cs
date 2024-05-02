@@ -18,6 +18,9 @@ public static class PersistanceServiceRegistration
         services.AddScoped<IWordOfTheDayRepository, WordOfTheDayRepository>();
         services.AddScoped<IProcedurePointInformationRepository, ProcedurePointInformationRepository>();
         services.AddScoped<IProcedureRepository, ProcedureRepository>();
+        services.AddScoped<ISocialMediaApplicationRepository, SocialMediaApplicationRepository>();
+        services.AddScoped<ISocialMediaApplicationUsageRepository, SocialMediaApplicationUsageRepository>();
+        
 
         services.AddDbContext<AppDbContext>(options =>
         {

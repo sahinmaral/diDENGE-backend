@@ -17,5 +17,9 @@ public class SocialMediaApplicationUsageConfiguration : IEntityTypeConfiguration
         builder.HasOne(smau => smau.AddictionLevel)
             .WithMany()
             .HasForeignKey(smau => smau.AddictionLevelId);
+        
+        builder.HasOne(smau => smau.SocialMediaApplication)
+            .WithMany()
+            .HasForeignKey(smau => smau.SocialMediaApplicationId);
     }
 }
