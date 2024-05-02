@@ -16,6 +16,13 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
     {
         Context = context;
     }
+    
+    public async Task<int> CountAsync(Expression<Func<TEntity, bool>>? predicate = null)
+    {
+        return predicate is null ? 
+            await Context.Set<TEntity>().CountAsync() : 
+            await Context.Set<TEntity>().CountAsync(predicate);
+    }
 
     public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate)
     {
@@ -92,6 +99,13 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
         return entity;
     }
 
+    public int Count(Expression<Func<TEntity, bool>>? predicate = null)
+    {
+        return predicate is null ? 
+            Context.Set<TEntity>().Count() : 
+            Context.Set<TEntity>().Count(predicate);
+    }
+    
     public TEntity? Get(Expression<Func<TEntity, bool>> predicate)
     {
         return Context.Set<TEntity>().FirstOrDefault(predicate);
