@@ -19,4 +19,7 @@ public class User : IdentityUser<string>
     public DateTime? RefreshTokenExpires { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
+
+    public bool IsDoNotDisturbEnabled { get; set; } = false;
+    public DateTime? DoNotDisturbExpires { get; set; }
 }
