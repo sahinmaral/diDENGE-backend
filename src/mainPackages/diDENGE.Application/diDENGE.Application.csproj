@@ -24,7 +24,6 @@
     <Folder Include="Features\Auths\" />
     <Folder Include="Features\SocialMediaApplicationUsages\Models\" />
     <Folder Include="Features\SocialMediaApplicationUsages\Profiles\" />
-    <Folder Include="Features\SocialMediaApplicationUsages\Queries\" />
     <Folder Include="Features\Users\Profiles\" />
   </ItemGroup>
 
