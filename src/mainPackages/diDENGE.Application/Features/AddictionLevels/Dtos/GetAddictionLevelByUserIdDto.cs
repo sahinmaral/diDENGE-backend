@@ -7,4 +7,5 @@ public class GetAddictionLevelByUserIdDto
     public double DailyLimit { get; set; }
     public double MinimumGrade { get; set; }
     public double MaximumGrade { get; set; }
+    public DateTime CreatedAt { get; set; }
 }

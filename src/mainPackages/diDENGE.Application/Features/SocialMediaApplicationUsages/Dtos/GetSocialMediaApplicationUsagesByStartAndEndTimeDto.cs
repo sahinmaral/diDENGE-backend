@@ -1,9 +1,10 @@
 namespace diDENGE.Application.Features.SocialMediaApplicationUsages.Dtos;
 
-public class GetSocialMediaApplicationUsagesByStartTimeDto
+public class GetSocialMediaApplicationUsagesByStartAndEndTimeDto
 {
     public string Name { get; set; }
     public string PackageName { get; set; }
     public double TotalSpendTime { get; set; }
-    public DateTime CreatedAt { get; set; }
+    public int OpeningCount { get; set; }
+    public DateTime Date { get; set; }
 }

@@ -17,11 +17,14 @@ public class GetByUserIdQuery : IRequest<GetAddictionLevelByUserIdDto>
 
         public async Task<GetAddictionLevelByUserIdDto> Handle(GetByUserIdQuery request, CancellationToken cancellationToken)
         {
-            var userAddictionLevel = await userAddictionLevelRepository.GetDetailedAsync(
+            var userAddictionLevels = await userAddictionLevelRepository.GetListAsync(
                 predicate:x => x.UserId == request.UserId,
-                include: levels => levels.Include(l => l.AddictionLevel) 
-            );
-            return mapper.Map<GetAddictionLevelByUserIdDto>(userAddictionLevel);
+                orderBy: queryable => queryable.OrderByDescending(x => x.CreatedAt), 
+                include: levels => levels.Include(l => l.AddictionLevel), cancellationToken: cancellationToken);
+
+            var latestAddictionLevel = userAddictionLevels.Items.FirstOrDefault();
+            
+            return mapper.Map<GetAddictionLevelByUserIdDto>(latestAddictionLevel);
         }
     }
 }

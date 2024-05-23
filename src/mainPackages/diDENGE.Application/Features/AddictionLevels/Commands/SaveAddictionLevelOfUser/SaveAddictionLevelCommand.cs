@@ -64,7 +64,7 @@ public class SaveAddictionLevelOfUserCommand : IRequest<SavedUserAddictionLevelD
                 var lastDeterminedAddictionLevelOfUser = allSavedDeterminedAddictionLevelsOfUser.Items.First();
                 var intervalOfLastDeterminedAddictionLevel =
                     (DateTime.Now - lastDeterminedAddictionLevelOfUser.CreatedAt).TotalDays;
-                if (Convert.ToInt16(intervalOfLastDeterminedAddictionLevel) != AddictionLevelConstants.UserAddictionLevelIdentificationDayInterval)
+                if (Convert.ToInt16(intervalOfLastDeterminedAddictionLevel) < AddictionLevelConstants.UserAddictionLevelIdentificationDayInterval)
                 {
                     throw new BusinessException($"There must be {AddictionLevelConstants.UserAddictionLevelIdentificationDayInterval} days between the last addiction level determination");
                 }

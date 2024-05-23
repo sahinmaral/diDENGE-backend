@@ -45,7 +45,7 @@ public class AddSocialMediaApplicationUsagesCommand : IRequest
                         AddictionLevelId = request.AddictionLevelId,
                         SocialMediaApplicationId = socialMediaApplication.Id,
                         SpentTime = 0,
-                        OpeningCount = 0,
+                        OpeningCount = 0
                     };
 
                     socialMediaApplicationUsageRepository.Add(newSocialMediaApplicationUsage);
@@ -58,7 +58,7 @@ public class AddSocialMediaApplicationUsagesCommand : IRequest
                         AddictionLevelId = request.AddictionLevelId,
                         SocialMediaApplicationId = socialMediaApplication.Id,
                         SpentTime = foundSocialMediaApplicationUsage.TotalTimeInForeground,
-                        OpeningCount = foundSocialMediaApplicationUsage.OpenCount,
+                        OpeningCount = foundSocialMediaApplicationUsage.OpenCount
                     };
                     
                     socialMediaApplicationUsageRepository.Add(newSocialMediaApplicationUsage);

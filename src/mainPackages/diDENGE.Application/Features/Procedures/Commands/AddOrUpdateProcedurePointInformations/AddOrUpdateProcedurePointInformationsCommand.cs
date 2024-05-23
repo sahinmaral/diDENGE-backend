@@ -38,22 +38,21 @@ public class AddOrUpdateProcedurePointInformationsCommand : IRequest<GetProcedur
             if (request.ProcedurePointInformations.Count == 0)
             {
                 var procedures = await procedureRepository.GetListAsync(size:3, cancellationToken: cancellationToken);
-                
-                var tasks = procedures.Items.Select(procedure =>
+
+                foreach (var procedure in procedures.Items)
                 {
                     var procedurePointInformation = new ProcedurePointInformation
                     {
                         UserId = request.UserId,
-                        AddictionLevelId = userAddictionLevel.Id,
+                        AddictionLevelId = userAddictionLevel.AddictionLevelId,
                         ProcedureId = procedure.Id,
                         OverallGrade = 0,
                         Count = 0
                     };
                 
-                    return procedurePointInformationRepository.AddAsync(procedurePointInformation);
-                }).ToArray();
+                    procedurePointInformationRepository.Add(procedurePointInformation);
+                }
                 
-                await Task.WhenAll(tasks);
             }
             else
             {

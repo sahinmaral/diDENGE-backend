@@ -24,7 +24,12 @@ public static class PersistanceServiceRegistration
 
         services.AddDbContext<AppDbContext>(options =>
         {
-            options.UseSqlServer(connectionString);
+            options.UseSqlServer(connectionString, builder =>
+            {
+                {
+                    builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+                }
+            });
         });
 
         return services;
