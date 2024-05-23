@@ -139,6 +139,5 @@ $RECYCLE.BIN/
 
 _NCrunch*
 
-# WebAPI appsettings.json
-appsettings.json
+# WebAPI appsettings.json for Production Environment
 appsettings.Production.json
