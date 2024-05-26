@@ -46,27 +46,15 @@ public class JwtProvider : IJwtProvider
                 SecurityAlgorithms.HmacSha256Signature));
 
         string token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-
-        string refreshToken = GenerateRefreshToken();
-
-        user.RefreshToken = refreshToken;
-        user.RefreshTokenExpires = expires.AddMinutes(_jwtOptions.RefreshTokenExpiration);
+        
 
         await _userManager.UpdateAsync(user);
 
         var response = new TokenResponse
         {
-            AccessToken = token,
-            RefreshToken = refreshToken,
-            RefreshTokenExpires = Convert.ToDateTime(user.RefreshTokenExpires)
+            AccessToken = token
         };
 
         return response;
-    }
-
-    private string GenerateRefreshToken()
-    {
-        Guid refreshTokenGuid = Guid.NewGuid();
-        return refreshTokenGuid.ToString();
     }
 }

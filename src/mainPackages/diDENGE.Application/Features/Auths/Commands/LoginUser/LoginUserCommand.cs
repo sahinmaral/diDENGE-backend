@@ -33,8 +33,6 @@ public class LoginUserCommand : IRequest<LoggedUserDto>
 
             LoggedUserDto loggedUserDto = mapper.Map<LoggedUserDto>(loggedInUser);
             loggedUserDto.AccessToken = tokenResponse.AccessToken;
-            loggedUserDto.RefreshToken = tokenResponse.RefreshToken;
-            loggedUserDto.RefreshTokenExpires = tokenResponse.RefreshTokenExpires;
 
             return loggedUserDto;
         }

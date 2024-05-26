@@ -5,13 +5,15 @@ using diDENGE.Presentation;
 using Core.Security;
 using diDENGE.Infrastructure;
 using diDENGE.Persistance.Context;
+using diDENGE.WebAPI.Extensions;
 using DotNetEnv.Configuration;
 using Microsoft.EntityFrameworkCore;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddDotNetEnv();
+
+builder.ConfigureEnvironmentVariables();
 
 builder.Services
     .AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true)

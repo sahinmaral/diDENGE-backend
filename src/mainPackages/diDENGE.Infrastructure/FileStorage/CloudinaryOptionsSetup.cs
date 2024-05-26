@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
 namespace diDENGE.Infrastructure.FileStorage;
@@ -24,15 +23,6 @@ public sealed class CloudinaryOptionsSetup : IConfigureOptions<CloudinaryOptions
 
     public void Configure(CloudinaryOptions options)
     {
-        if (_environment.IsDevelopment())
-        {
-            _configuration.GetSection("Cloudinary").Bind(options);
-        }
-        if (_environment.IsProduction())
-        {
-            options.CloudName = Environment.GetEnvironmentVariable("CLOUDINARY_CLOUD_NAME");
-            options.APIKey = Environment.GetEnvironmentVariable("CLOUDINARY_API_KEY");
-            options.APISecret = Environment.GetEnvironmentVariable("CLOUDINARY_API_SECRET");
-        }
+        _configuration.GetSection("Cloudinary").Bind(options);
     }
 }

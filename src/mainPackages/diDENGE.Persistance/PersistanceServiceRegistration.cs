@@ -11,7 +11,7 @@ public static class PersistanceServiceRegistration
 {
     public static IServiceCollection AddPersistanceServices(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("MSSQLConnectionString");
+        var connectionString = configuration["ConnectionStrings:MSSQLConnectionString"];
 
         services.AddScoped<IAddictionLevelRepository, AddictionLevelRepository>();
         services.AddScoped<IUserAddictionLevelRepository, UserAddictionLevelRepository>();

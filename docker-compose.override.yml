@@ -9,7 +9,7 @@
       - sqlserver_volume:/var/opt/mssql
   didenge-webapi:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Docker
     ports:
       - "5178:8080"
     depends_on: 

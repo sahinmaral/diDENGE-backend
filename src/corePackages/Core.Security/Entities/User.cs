@@ -15,8 +15,6 @@ public class User : IdentityUser<string>
     public DateTime BirthDate { get; set; }
     public string? ProfilePhotoURL { get; set; }
     public bool IsNewUser { get; set; } = true;
-    public string? RefreshToken { get; set; }
-    public DateTime? RefreshTokenExpires { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 

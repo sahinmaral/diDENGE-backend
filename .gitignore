@@ -136,8 +136,4 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
-
 _NCrunch*
-
-# WebAPI appsettings.json for Production Environment
-appsettings.Production.json
