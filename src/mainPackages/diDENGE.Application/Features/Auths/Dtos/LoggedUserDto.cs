@@ -13,6 +13,7 @@ public class LoggedUserDto : TokenResponse
     public string UserName { get; init; }
     public string Email { get; init; }
     public bool IsNewUser { get; set; }
-    public bool IsDoNotDisturbEnabled { get; set; } = false;
+    public bool IsDoNotDisturbEnabled { get; set; }
     public DateTime? DoNotDisturbExpires { get; set; }
+    public DateTime CreatedAt { get; set; }
 }
