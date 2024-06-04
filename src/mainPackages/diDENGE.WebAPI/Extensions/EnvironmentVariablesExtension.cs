@@ -24,8 +24,10 @@ public static class EnvironmentVariablesExtension
     {
         configuration["ConnectionStrings:MSSQLConnectionString"] = Environment.GetEnvironmentVariable("MSSQLConnectionString");
         configuration["Cloudinary:CloudName"] = Environment.GetEnvironmentVariable("CloudinaryCloudName");
-        configuration["ConnectionStrings:APIKey"] = Environment.GetEnvironmentVariable("CloudinaryApiKey");
-        configuration["ConnectionStrings:APISecret"] = Environment.GetEnvironmentVariable("CloudinaryApiSecret");
+        configuration["Cloudinary:APIKey"] = Environment.GetEnvironmentVariable("CloudinaryApiKey");
+        configuration["Cloudinary:APISecret"] = Environment.GetEnvironmentVariable("CloudinaryApiSecret");
+        configuration["SendGrid:APIKey"] = Environment.GetEnvironmentVariable("SendGridApiKey");
+        configuration["SendGrid:MailAccount"] = Environment.GetEnvironmentVariable("SendGridMailAccount");
     }
     
 
@@ -58,6 +60,14 @@ public static class EnvironmentVariablesExtension
             KeyVaultSecret jwtSecurityKeySecret = client.GetSecret("JWTSecurityKey");
             string jwtSecurityKeySecretValue = jwtSecurityKeySecret.Value;
             configuration["JwtOptions:SecurityKey"] = jwtSecurityKeySecretValue;
+            
+            KeyVaultSecret sendGridApiKeySecret = client.GetSecret("SendGridApiKey");
+            string sendGridApiKeySecretValue = sendGridApiKeySecret.Value;
+            configuration["SendGrid:ApiKey"] = sendGridApiKeySecretValue;
+            
+            KeyVaultSecret sendGridMailAccountSecret = client.GetSecret("SendGridMailAccount");
+            string sendGridMailAccountSecretValue = sendGridMailAccountSecret.Value;
+            configuration["SendGrid:MailAccount"] = sendGridMailAccountSecretValue;
         }
         catch (Exception ex)
         {

@@ -60,4 +60,12 @@ public class AuthBusinessRules(UserManager<User> userManager)
 
         return Task.CompletedTask;
     }
+
+    public async Task CheckUserWithPhoneNumberAlreadyExists(string phoneNumber)
+    {
+        User? foundUser = await userManager.Users.FirstOrDefaultAsync(user => user.PhoneNumber == phoneNumber);
+
+        if (foundUser is not null)
+            throw new BusinessException("This phone number is already taken");
+    }
 }

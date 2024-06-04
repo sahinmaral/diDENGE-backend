@@ -5,6 +5,8 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using diDENGE.Application.Features.Auths.Dtos;
 using diDENGE.Application.Features.Auths.Rules;
+using diDENGE.Application.Services.MessageService;
+using diDENGE.Application.Services.Repositories;
 
 namespace diDENGE.Application.Features.Auths.Commands.RegisterUser;
 
@@ -22,30 +24,59 @@ public partial class RegisterUserCommand : IRequest<RegisteredUserDto>
 
     public sealed class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, RegisteredUserDto>
     {
-        private readonly RoleManager<Role> _roleManager;
         private readonly UserManager<User> _userManager;
         private readonly AuthBusinessRules _authBusinessRules;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMessageService _messageService;
 
-        public RegisterUserCommandHandler(UserManager<User> userManager, AuthBusinessRules authBusinessRules, IMapper mapper, RoleManager<Role> roleManager)
+        public RegisterUserCommandHandler(UserManager<User> userManager,
+            AuthBusinessRules authBusinessRules,
+            IMapper mapper,
+            IUnitOfWork unitOfWork,
+            IMessageService messageService)
         {
             _userManager = userManager;
             _authBusinessRules = authBusinessRules;
             _mapper = mapper;
-            _roleManager = roleManager;
+            _unitOfWork = unitOfWork;
+            _messageService = messageService;
         }
 
         public async Task<RegisteredUserDto> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             await _authBusinessRules.CheckUserWithUsernameAlreadyExists(request.UserName);
             await _authBusinessRules.CheckUserWithEmailAlreadyExists(request.Email);
+            await _authBusinessRules.CheckUserWithPhoneNumberAlreadyExists(request.PhoneNumber);
 
-            User newUser = _mapper.Map<User>(request);
+            RegisteredUserDto registeredUserDto = null;
 
-            await _userManager.CreateAsync(newUser, request.Password);
-            await _userManager.AddToRoleAsync(newUser, "User");
-                
-            return _mapper.Map<RegisteredUserDto>(newUser);
+            await _unitOfWork.ExecuteAsync(async () =>
+            {
+                User newUser = _mapper.Map<User>(request);
+
+                var createUserResult = await _userManager.CreateAsync(newUser, request.Password);
+                if (!createUserResult.Succeeded)
+                {
+                    throw new BusinessException("Error during user creation");
+                }
+
+                var addToRoleResult = await _userManager.AddToRoleAsync(newUser, "User");
+                if (!addToRoleResult.Succeeded)
+                {
+                    throw new BusinessException("Error during adding user to role");
+                }
+
+                var sendVerificationCodeResult = await _messageService.SendVerificationCodeAsync(request.PhoneNumber);
+                if (!sendVerificationCodeResult)
+                {
+                    throw new BusinessException("Error during sending verification code");
+                }
+
+                registeredUserDto = _mapper.Map<RegisteredUserDto>(newUser);
+            });
+
+            return registeredUserDto;
         }
     }
 }

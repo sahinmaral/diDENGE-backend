@@ -20,7 +20,8 @@ public static class PersistanceServiceRegistration
         services.AddScoped<IProcedureRepository, ProcedureRepository>();
         services.AddScoped<ISocialMediaApplicationRepository, SocialMediaApplicationRepository>();
         services.AddScoped<ISocialMediaApplicationUsageRepository, SocialMediaApplicationUsageRepository>();
-        
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         services.AddDbContext<AppDbContext>(options =>
         {
