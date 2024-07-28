@@ -12,4 +12,9 @@
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0"/>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Google.Apis.Auth">
+      <HintPath>..\..\..\..\..\..\.nuget\packages\google.apis.auth\1.68.0\lib\net6.0\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

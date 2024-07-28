@@ -26,9 +26,6 @@ public class LoginUserCommand : IRequest<LoggedUserDto>
 
             await authBusinessRules.CheckIfUserEnteredCorrectPassword(loggedInUser, request.Password);
 
-            //TODO: E-posta doğrulaması yerine telefon numarası doğrulaması yapılabilir
-            //await _authBusinessRules.CheckIfUserEmailHasBeenVerified(loggedInUser);
-
             TokenResponse tokenResponse = await jwtProvider.CreateTokenAsync(loggedInUser);
 
             LoggedUserDto loggedUserDto = mapper.Map<LoggedUserDto>(loggedInUser);

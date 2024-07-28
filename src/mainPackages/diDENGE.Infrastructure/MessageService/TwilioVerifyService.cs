@@ -26,7 +26,8 @@ public class TwilioVerifyService: IMessageService
             channel: "sms",
             pathServiceSid: _verifyServiceSid
         );
-        return verification.Status == "pending";
+        
+        return verification != null && verification.Status == "pending";
     }
 
     public async Task<bool> VerifyCodeAsync(string phoneNumber, string code)
@@ -36,6 +37,7 @@ public class TwilioVerifyService: IMessageService
             code: code,
             pathServiceSid: _verifyServiceSid
         );
-        return verificationCheck.Status == "approved";
+        
+        return verificationCheck != null && verificationCheck.Status == "approved";
     }
 }

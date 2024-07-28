@@ -53,14 +53,6 @@ public class AuthBusinessRules(UserManager<User> userManager)
             throw new BusinessException("You entered the wrong password along with the username or email you entered");
     }
 
-    public Task CheckIfUserEmailHasBeenVerified(User user)
-    {
-        if (!user.EmailConfirmed)
-            throw new BusinessException("Please confirm your account via the e - mail sent to the e - mail address you registered with");
-
-        return Task.CompletedTask;
-    }
-
     public async Task CheckUserWithPhoneNumberAlreadyExists(string phoneNumber)
     {
         User? foundUser = await userManager.Users.FirstOrDefaultAsync(user => user.PhoneNumber == phoneNumber);

@@ -10,7 +10,7 @@ using diDENGE.Application.Services.Repositories;
 
 namespace diDENGE.Application.Features.Auths.Commands.RegisterUser;
 
-public partial class RegisterUserCommand : IRequest<RegisteredUserDto>
+public class RegisterUserCommand : IRequest<RegisterUserResponseDto>
 {
     public string FirstName { get; set; }
     public string? MiddleName { get; set; }
@@ -22,61 +22,48 @@ public partial class RegisterUserCommand : IRequest<RegisteredUserDto>
     public string PhoneNumber { get; set; }
     public string Password { get; set; }
 
-    public sealed class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, RegisteredUserDto>
+    public sealed class RegisterUserCommandHandler(
+        UserManager<User> userManager,
+        AuthBusinessRules authBusinessRules,
+        IMapper mapper,
+        IUnitOfWork unitOfWork,
+        IMessageService messageService)
+        : IRequestHandler<RegisterUserCommand, RegisterUserResponseDto>
     {
-        private readonly UserManager<User> _userManager;
-        private readonly AuthBusinessRules _authBusinessRules;
-        private readonly IMapper _mapper;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMessageService _messageService;
-
-        public RegisterUserCommandHandler(UserManager<User> userManager,
-            AuthBusinessRules authBusinessRules,
-            IMapper mapper,
-            IUnitOfWork unitOfWork,
-            IMessageService messageService)
+        public async Task<RegisterUserResponseDto> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            _userManager = userManager;
-            _authBusinessRules = authBusinessRules;
-            _mapper = mapper;
-            _unitOfWork = unitOfWork;
-            _messageService = messageService;
-        }
-
-        public async Task<RegisteredUserDto> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
-        {
-            await _authBusinessRules.CheckUserWithUsernameAlreadyExists(request.UserName);
-            await _authBusinessRules.CheckUserWithEmailAlreadyExists(request.Email);
-            await _authBusinessRules.CheckUserWithPhoneNumberAlreadyExists(request.PhoneNumber);
-
-            RegisteredUserDto registeredUserDto = null;
-
-            await _unitOfWork.ExecuteAsync(async () =>
+            await authBusinessRules.CheckUserWithUsernameAlreadyExists(request.UserName);
+            await authBusinessRules.CheckUserWithEmailAlreadyExists(request.Email);
+            await authBusinessRules.CheckUserWithPhoneNumberAlreadyExists(request.PhoneNumber);
+                
+            var response = new RegisterUserResponseDto();
+            
+            await unitOfWork.ExecuteAsync(async () =>
             {
-                User newUser = _mapper.Map<User>(request);
+                User newUser = mapper.Map<User>(request);
 
-                var createUserResult = await _userManager.CreateAsync(newUser, request.Password);
+                var createUserResult = await userManager.CreateAsync(newUser, request.Password);
                 if (!createUserResult.Succeeded)
                 {
                     throw new BusinessException("Error during user creation");
                 }
 
-                var addToRoleResult = await _userManager.AddToRoleAsync(newUser, "User");
+                var addToRoleResult = await userManager.AddToRoleAsync(newUser, "User");
                 if (!addToRoleResult.Succeeded)
                 {
                     throw new BusinessException("Error during adding user to role");
                 }
 
-                var sendVerificationCodeResult = await _messageService.SendVerificationCodeAsync(request.PhoneNumber);
+                var sendVerificationCodeResult = await messageService.SendVerificationCodeAsync(request.PhoneNumber);
                 if (!sendVerificationCodeResult)
                 {
                     throw new BusinessException("Error during sending verification code");
                 }
-
-                registeredUserDto = _mapper.Map<RegisteredUserDto>(newUser);
+                
+                response.UserId = newUser.Id;
             });
 
-            return registeredUserDto;
+            return response;
         }
     }
 }

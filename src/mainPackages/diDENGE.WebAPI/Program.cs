@@ -40,7 +40,7 @@ builder.Services.AddCors(options =>
         });
 });
 
-builder.Services.AddSecurityServices<AppDbContext>();
+builder.Services.AddSecurityServices<AppDbContext>(builder.Configuration);
 
 var app = builder.Build();
 

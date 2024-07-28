@@ -28,6 +28,9 @@ public static class EnvironmentVariablesExtension
         configuration["Cloudinary:APISecret"] = Environment.GetEnvironmentVariable("CloudinaryApiSecret");
         configuration["SendGrid:APIKey"] = Environment.GetEnvironmentVariable("SendGridApiKey");
         configuration["SendGrid:MailAccount"] = Environment.GetEnvironmentVariable("SendGridMailAccount");
+        configuration["Twilio:AccountSID"] = Environment.GetEnvironmentVariable("TwilioAccountSID");
+        configuration["Twilio:AuthToken"] = Environment.GetEnvironmentVariable("TwilioAuthToken");
+        configuration["Twilio:VerifyServiceSID"] = Environment.GetEnvironmentVariable("TwilioVerifyServiceSID");
     }
     
 
@@ -65,9 +68,17 @@ public static class EnvironmentVariablesExtension
             string sendGridApiKeySecretValue = sendGridApiKeySecret.Value;
             configuration["SendGrid:ApiKey"] = sendGridApiKeySecretValue;
             
-            KeyVaultSecret sendGridMailAccountSecret = client.GetSecret("SendGridMailAccount");
-            string sendGridMailAccountSecretValue = sendGridMailAccountSecret.Value;
-            configuration["SendGrid:MailAccount"] = sendGridMailAccountSecretValue;
+            KeyVaultSecret twilioAccountSidKeySecret = client.GetSecret("TwilioAccountSID");
+            string twilioAccountSidKeySecretValue = twilioAccountSidKeySecret.Value;
+            configuration["Twilio:AccountSID"] = twilioAccountSidKeySecretValue;
+            
+            KeyVaultSecret twilioAuthTokenKeySecret = client.GetSecret("TwilioAuthToken");
+            string twilioAuthTokenKeySecretValue = twilioAuthTokenKeySecret.Value;
+            configuration["Twilio:AuthToken"] = twilioAuthTokenKeySecretValue;
+            
+            KeyVaultSecret twilioVerifyServiceSidKeySecret = client.GetSecret("TwilioVerifyServiceSID");
+            string twilioVerifyServiceSidKeySecretValue = twilioVerifyServiceSidKeySecret.Value;
+            configuration["Twilio:VerifyServiceSID"] = twilioVerifyServiceSidKeySecretValue;
         }
         catch (Exception ex)
         {

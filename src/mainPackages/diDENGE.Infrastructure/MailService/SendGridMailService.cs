@@ -20,11 +20,12 @@ public class SendGridMailService : IMailService
         var client = new SendGridClient(_configuration["SendGrid:APIKey"]);
 
         var from = new EmailAddress(_configuration["SendGrid:MailAccount"], "didenge");
-        var to = new EmailAddress(email);
+        var to = new EmailAddress(_configuration["SendGrid:MailAccount"], "didenge");
 
-        var strippedHtmlContent = StripHtmlTags(body);
+        var strippedHtmlContent = StripHtmlTags("test");
         var msg = MailHelper.CreateSingleEmail(from, to, subject, strippedHtmlContent, body);
-        await client.SendEmailAsync(msg);
+        var response = await client.SendEmailAsync(msg);
+        
     }
 
     private string StripHtmlTags(string input)

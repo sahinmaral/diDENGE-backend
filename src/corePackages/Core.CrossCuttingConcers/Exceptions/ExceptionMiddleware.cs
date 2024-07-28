@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using Newtonsoft.Json;
 
 namespace Core.CrossCuttingConcerns.Exceptions;
 
@@ -30,82 +31,91 @@ public class ExceptionMiddleware
     {
         context.Response.ContentType = "application/json";
 
-        if (exception.GetType() == typeof(ValidationException)) return CreateValidationException(context, exception);
-        if (exception.GetType() == typeof(BusinessException)) return CreateBusinessException(context, exception);
-        if (exception.GetType() == typeof(EntityNotFoundException)) return CreateEntityNotFoundException(context, exception);
-        if (exception.GetType() == typeof(AuthorizationException)) return CreateAuthorizationException(context, exception);
-        return CreateInternalException(context, exception);
-    }
-
-    private Task CreateAuthorizationException(HttpContext context, Exception exception)
-    {
-        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.Unauthorized);
-
-        return context.Response.WriteAsync(new AuthorizationProblemDetails
+        if (exception is ValidationException validationException)
         {
-            Status = StatusCodes.Status401Unauthorized,
-            Type = "https://example.com/probs/authorization",
-            Title = "Authorization exception",
-            Detail = exception.Message,
-            Instance = ""
-        }.ToString());
-    }
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            object errors = validationException.Errors;
 
-    private Task CreateEntityNotFoundException(HttpContext context, Exception exception)
-    {
-        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.NotFound);
+            var validationProblemDetails = new ValidationProblemDetails
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Type = "https://example.com/probs/validation",
+                Title = "Validation error(s)",
+                Detail = "One or more validation errors occurred.",
+                Instance = context.Request.Path,
+                Errors = errors
+            };
 
-        return context.Response.WriteAsync(new EntityNotFoundProblemDetails
+            string json = JsonConvert.SerializeObject(validationProblemDetails);
+            return context.Response.WriteAsync(json);
+        }
+
+        if (exception is BusinessException)
         {
-            Status = StatusCodes.Status404NotFound,
-            Type = "https://example.com/probs/notFound",
-            Title = "Entity not found exception",
-            Detail = exception.Message,
-            Instance = ""
-        }.ToString());
-    }
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
-    private Task CreateBusinessException(HttpContext context, Exception exception)
-    {
-        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.BadRequest);
+            var businessProblemDetails = new BusinessProblemDetails
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Type = "https://example.com/probs/business",
+                Title = "Business exception",
+                Detail = exception.Message,
+                Instance = context.Request.Path
+            };
 
-        return context.Response.WriteAsync(new BusinessProblemDetails
+            string json = JsonConvert.SerializeObject(businessProblemDetails);
+            return context.Response.WriteAsync(json);
+        }
+
+        if (exception is EntityNotFoundException)
         {
-            Status = StatusCodes.Status400BadRequest,
-            Type = "https://example.com/probs/business",
-            Title = "Business exception",
-            Detail = exception.Message,
-            Instance = ""
-        }.ToString());
-    }
+            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
 
-    private Task CreateValidationException(HttpContext context, Exception exception)
-    {
-        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.BadRequest);
-        object errors = ((ValidationException)exception).Errors;
+            var entityNotFoundProblemDetails = new EntityNotFoundProblemDetails
+            {
+                Status = StatusCodes.Status404NotFound,
+                Type = "https://example.com/probs/notFound",
+                Title = "Entity not found exception",
+                Detail = exception.Message,
+                Instance = context.Request.Path
+            };
 
-        return context.Response.WriteAsync(new ValidationProblemDetails
+            string json = JsonConvert.SerializeObject(entityNotFoundProblemDetails);
+            return context.Response.WriteAsync(json);
+        }
+
+        if (exception is AuthorizationException)
         {
-            Status = StatusCodes.Status400BadRequest,
-            Type = "https://example.com/probs/validation",
-            Title = "Validation error(s)",
-            Detail = "",
-            Instance = "",
-            Errors = errors
-        }.ToString());
-    }
+            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
 
-    private Task CreateInternalException(HttpContext context, Exception exception)
-    {
-        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.InternalServerError);
+            var authorizationProblemDetails = new AuthorizationProblemDetails
+            {
+                Status = StatusCodes.Status401Unauthorized,
+                Type = "https://example.com/probs/authorization",
+                Title = "Authorization exception",
+                Detail = exception.Message,
+                Instance = context.Request.Path
+            };
 
-        return context.Response.WriteAsync(new ProblemDetails
+            string json = JsonConvert.SerializeObject(authorizationProblemDetails);
+            return context.Response.WriteAsync(json);
+        }
+        else
         {
-            Status = StatusCodes.Status500InternalServerError,
-            Type = "https://example.com/probs/internal",
-            Title = "Internal exception",
-            Detail = exception.Message,
-            Instance = ""
-        }.ToString());
+            // For unhandled exceptions, return a generic error message
+            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+            var problemDetails = new ProblemDetails
+            {
+                Status = StatusCodes.Status500InternalServerError,
+                Type = "https://example.com/probs/internal",
+                Title = "Internal exception",
+                Detail = exception.StackTrace,
+                Instance = context.Request.Path
+            };
+
+            string json = JsonConvert.SerializeObject(problemDetails);
+            return context.Response.WriteAsync(json);
+        }
     }
 }

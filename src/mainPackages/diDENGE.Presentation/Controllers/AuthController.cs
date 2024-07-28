@@ -3,6 +3,8 @@ using diDENGE.Presentation.Controllers.Common;
 using Microsoft.AspNetCore.Mvc;
 using diDENGE.Application.Features.Auths.Commands.LoginUser;
 using diDENGE.Application.Features.Auths.Commands.RegisterUser;
+using diDENGE.Application.Features.Auths.Commands.SendVerificationCode;
+using diDENGE.Application.Features.Auths.Commands.VerifyVerificationCode;
 
 namespace diDENGE.Presentation.Controllers;
 
@@ -11,7 +13,7 @@ public class AuthController : BaseController
     [HttpPost("Register")]
     public async Task<IActionResult> Register([FromBody] RegisterUserCommand request)
     {
-        RegisteredUserDto response = await mediator.Send(request);
+        RegisterUserResponseDto response = await mediator.Send(request);
         return Created("", response);
     }
 
@@ -22,4 +24,17 @@ public class AuthController : BaseController
         return Ok(response);
     }
     
+    [HttpPost("SendVerificationCode")]
+    public async Task<IActionResult> SendVerificationCode([FromBody] SendVerificationCodeCommand request)
+    {
+        await mediator.Send(request);
+        return Ok();
+    }
+    
+    [HttpPost("VerifyVerificationCode")]
+    public async Task<IActionResult> VerifyVerificationCode([FromBody] VerifyVerificationCodeCommand request)
+    {
+        await mediator.Send(request);
+        return Ok();
+    }
 }

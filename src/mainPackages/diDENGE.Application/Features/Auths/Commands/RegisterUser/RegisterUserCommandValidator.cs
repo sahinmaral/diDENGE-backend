@@ -27,7 +27,7 @@ public class RegisterUserCommandValidator : AbstractValidator<RegisterUserComman
         RuleFor(u => u.ProfilePhotoURL)
             .MinimumLength(5).When(u => !string.IsNullOrEmpty(u.ProfilePhotoURL));
         RuleFor(u => u.ProfilePhotoURL)
-            .MinimumLength(200).When(u => !string.IsNullOrEmpty(u.ProfilePhotoURL));
+            .MaximumLength(200).When(u => !string.IsNullOrEmpty(u.ProfilePhotoURL));
 
         RuleFor(u => u.BirthDate).NotEmpty();
         RuleFor(u => u.BirthDate).LessThan(DateTime.Now);

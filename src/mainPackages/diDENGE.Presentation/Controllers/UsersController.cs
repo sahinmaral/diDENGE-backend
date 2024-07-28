@@ -1,4 +1,6 @@
+using diDENGE.Application.Features.Users.Commands.ContactUs;
 using diDENGE.Application.Features.Users.Commands.DeleteProfileImage;
+using diDENGE.Application.Features.Users.Commands.UpdateDoNotDisturbStatus;
 using diDENGE.Application.Features.Users.Commands.UpdateNameSurname;
 using diDENGE.Application.Features.Users.Commands.UpdatePassword;
 using diDENGE.Application.Features.Users.Commands.UpdateProfileImage;
@@ -11,6 +13,7 @@ namespace diDENGE.Presentation.Controllers;
 
 public class UsersController : BaseController
 {
+    
     [HttpPut("UpdateNameSurname/{userId}")]
     public async Task<IActionResult> UpdateNameSurname([FromRoute]string userId, [FromBody] UpdateNameSurnameCommandBodyDto body)
     {
@@ -62,6 +65,27 @@ public class UsersController : BaseController
         await mediator.Send(request);
         
         return NoContent();
+    }
+    
+    [HttpPut("UpdateDoNotDisturbStatus/{userId}")]
+    public async Task<IActionResult> UpdateDoNotDisturbStatus([FromRoute]string userId, [FromBody] UpdateDoNotDisturbStatusCommandBodyDto body)
+    {
+        UpdateDoNotDisturbStatusCommand request = new UpdateDoNotDisturbStatusCommand()
+        {
+            Body = body,
+            UserId = userId
+        };
+        await mediator.Send(request);
+        
+        return NoContent();
+    }
+    
+    [HttpPost("ContactUs")]
+    public async Task<IActionResult> ContactUs([FromBody] ContactUsCommand request)
+    {
+        await mediator.Send(request);
+        
+        return Ok();
     }
 
 }
